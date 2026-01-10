@@ -11,7 +11,7 @@ fetchProducts();
 
 if (array.length > 0) {
     array.forEach(element => {
-         body += `<article class="product-card">
+         body += `<div class="product-card">
                         <img src="${element.url}" alt="${element.name}" class="product-image">
                         <div class="product-body">
                             <div class="product-meta">
@@ -25,13 +25,22 @@ if (array.length > 0) {
                                     <span class="stock">${element.stock} units</span>
                                 </div>
                                 <div class="action-chips">
+                                <button class="btn btn-sm btn-danger" onclick="removeProduct(${element.id});">Delete</button>
                                 </div>
                             </div>
                         </div>
-                    </article>`
+                    </div>`
 
-                    loadBody();;
         productsCount++;
+        if (element.stock < 10) {
+            lowStockCount++;
+        }
+        if (element.stock === 0) {
+            outOfStockCount++;
+        }
+        
+        
+        loadBody();;
     });
 }
 
@@ -40,7 +49,7 @@ async function fetchProducts() {
     const response = await fetch("https://dummyjson.com/products");
     const data = await response.json();
     data.products.forEach(element => {
-        body += ` <article class="product-card">
+        body += ` <div class="product-card">
                         <img src="${element.thumbnail}" alt="${element.title}" class="product-image">
                         <div class="product-body">
                             <div class="product-meta">
@@ -57,7 +66,7 @@ async function fetchProducts() {
                                 </div>
                             </div>
                         </div>
-                    </article>`;
+                    </div>`;
         productsCount++;
         if (element.stock < 10) {
             lowStockCount++;
@@ -93,7 +102,7 @@ function addProduct() {
 
     array.push(product);
 
-    body += `<article class="product-card">
+    body += `<div class="product-card">
                         <img src="${product.url}" alt="${product.name}" class="product-image">
                         <div class="product-body">
                             <div class="product-meta">
@@ -107,13 +116,55 @@ function addProduct() {
                                     <span class="stock">${product.stock} units</span>
                                 </div>
                                 <div class="action-chips">
+                                <button class="btn btn-sm btn-danger" onclick="removeProduct(${product.id});">Delete</button>
                                 </div>
                             </div>
                         </div>
-                    </article>`;
+                    </div>`;
 
     loadBody();
     productsCount++;
+    if (product.stock < 10) {
+        lowStockCount++;
+    }
+    if (product.stock === 0) {
+        outOfStockCount++;
+    }
     loadDashboardStats();
     localStorage.setItem("products", JSON.stringify(array));
+    clearForm();
+
+        Swal.fire({
+        title: "Added successfully!",
+        icon: "success",
+        draggable: true
+        });
+}
+
+
+function clearForm(){
+    document.getElementById("id").value = "";
+    document.getElementById("price").value = "";
+    document.getElementById("stock").value = "";
+    document.getElementById("imageUrl").value = "";
+    document.getElementById("name").value = "";
+    document.getElementById("category").value = "All Categories";
+}
+
+
+
+function removeProduct(id) {
+    console.log("Delete clicked for ID:", id);
+    array = array.filter(product =>
+         product.id != id
+    );
+    
+    localStorage.setItem("products", JSON.stringify(array));
+
+        Swal.fire({
+        title: "Deleted successfully!",
+        icon: "success",
+        draggable: true
+        });
+    location.reload();
 }
