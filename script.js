@@ -168,3 +168,63 @@ function removeProduct(id) {
         });
     location.reload();
 }
+
+
+let inventoryChart = null; // Variable to store the chart instance
+
+function updateChart() {
+    const ctx = document.getElementById('inventoryChart').getContext('2d');
+
+    // Data for the chart
+    const data = {
+        labels: ['Total Products', 'Low Stock', 'Out of Stock'],
+        datasets: [{
+            label: 'Inventory Status',
+            data: [productsCount, lowStockCount, outOfStockCount],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.6)', // Blue
+                'rgba(255, 206, 86, 0.6)', // Yellow
+                'rgba(255, 99, 132, 0.6)'  // Red
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 99, 132, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    if (inventoryChart) {
+        // If chart exists, just update data and redraw
+        inventoryChart.data = data;
+        inventoryChart.update();
+    } else {
+        // Create the chart for the first time
+        inventoryChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: { beginAtZero: true }
+                },
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+}
+
+function loadDashboardStats() {
+    document.getElementById("productsCount").textContent = productsCount;
+    document.getElementById("lowStockCount").textContent = lowStockCount;
+    document.getElementById("outOfStockCount").textContent = outOfStockCount;
+    
+    // Call the chart update here
+    updateChart();
+}
+
+
+loadDashboardStats();
