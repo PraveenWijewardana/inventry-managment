@@ -3,13 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Inventory Management System</title>
     <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <i class="fa-solid fa-boxes-stacked"></i>
+            <span>Inventory Manager</span>
+        </div>
+        <div class="navbar-stats">
+            <div class="stat-item">
+                <span class="stat-label">Products</span>
+                <span class="stat-value" id="productsCount"></span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Low Stock</span>
+                <span class="stat-value warning" id="lowStockCount"></span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Out</span>
+                <span class="stat-value warning" id="outOfStockCount"></span>
+            </div>
+        </div>
+    </nav>
 
+    <main class="container">
+        <section class="card">
+            <div class="card-header">
+                <h2>
+                    <i class="fa-solid fa-cart-flatbed"></i>
+                    Load Products
+                </h2>
+            </div>
+            <div class="card-body">
+                <p class="section-lead">Search, filter, and load your latest stock with a quick glance at availability.</p>
+                <div class="search-filter-container">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" class="form-control" placeholder="Search products, SKU, or supplier">
+                    </div>
+                    <div class="filter-box">
+                        <select class="form-control">
+                            <option>All Categories</option>
+                            <option>Electronics</option>
+                            <option>Apparel</option>
+                            <option>Groceries</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fa-solid fa-cloud-arrow-down"></i>
+                        Load Inventory
+                    </button>
+                </div>
+
+                <div class="product-grid" id="load-products">
+                    
+
+                   
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-header">
+                <h2>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    Add / Edit Details
+                </h2>
+            </div>
+            <div class="card-body">
+                <p class="section-lead">Keep products tidy by updating key fields, suppliers, and imagery in one pass.</p>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-barcode"></i> Product Name</label>
+                        <input type="text" class="form-control" placeholder="Wireless Headphones">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-layer-group"></i> Category</label>
+                        <select class="form-control">
+                            <option>Select category</option>
+                            <option>Electronics</option>
+                            <option>Wearables</option>
+                            <option>Accessories</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-hashtag"></i> SKU</label>
+                        <input type="text" class="form-control" placeholder="WH-9921">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-dollar-sign"></i> Unit Price</label>
+                        <input type="number" class="form-control" placeholder="129.00">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-boxes-stacked"></i> Stock</label>
+                        <input type="number" class="form-control" placeholder="52">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-truck"></i> Supplier</label>
+                        <input type="text" class="form-control" placeholder="Acme Imports">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-image"></i> Image URL</label>
+                        <input type="url" class="form-control" placeholder="https://images.unsplash.com/...">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-note-sticky"></i> Notes</label>
+                        <textarea class="form-control" placeholder="Add shelf info, warranty, etc."></textarea>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Save Product
+                    </button>
+                    <button class="btn btn-success">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                        Update Existing
+                    </button>
+                    <button class="btn btn-danger">
+                        <i class="fa-solid fa-eraser"></i>
+                        Clear Form
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div>
+                <h4>Inventory Management</h4>
+                <p class="muted">Track products, balance stock, and keep suppliers in sync.</p>
+            </div>
+            <div class="footer-actions">
+                <button class="btn btn-secondary btn-sm"><i class="fa-solid fa-print"></i> Print Report</button>
+                <button class="btn btn-primary btn-sm"><i class="fa-solid fa-file-arrow-down"></i> Export CSV</button>
+            </div>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
