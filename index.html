@@ -52,8 +52,10 @@
                         <select class="form-control">
                             <option>All Categories</option>
                             <option>Electronics</option>
-                            <option>Apparel</option>
+                            <option>beauty</option>
                             <option>Groceries</option>
+                            <option>fragrances</option>
+                            <option>furniture</option>
                         </select>
                     </div>
                     <button class="btn btn-primary btn-sm">
@@ -82,44 +84,38 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label><i class="fa-solid fa-barcode"></i> Product Name</label>
-                        <input type="text" class="form-control" placeholder="Wireless Headphones">
+                        <input type="text" class="form-control" placeholder="Wireless Headphones" id="name">
                     </div>
                     <div class="form-group">
                         <label><i class="fa-solid fa-layer-group"></i> Category</label>
-                        <select class="form-control">
-                            <option>Select category</option>
+                        <select class="form-control" id="category">
+                             <option>All Categories</option>
                             <option>Electronics</option>
-                            <option>Wearables</option>
-                            <option>Accessories</option>
+                            <option>beauty</option>
+                            <option>Groceries</option>
+                            <option>fragrances</option>
+                            <option>furniture</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label><i class="fa-solid fa-hashtag"></i> SKU</label>
-                        <input type="text" class="form-control" placeholder="WH-9921">
+                        <label><i class="fa-solid fa-hashtag"></i> ID</label>
+                        <input type="text" class="form-control" placeholder="921" id="id">
                     </div>
                     <div class="form-group">
                         <label><i class="fa-solid fa-dollar-sign"></i> Unit Price</label>
-                        <input type="number" class="form-control" placeholder="129.00">
+                        <input type="number" class="form-control" placeholder="129.00" id="price">
                     </div>
                     <div class="form-group">
                         <label><i class="fa-solid fa-boxes-stacked"></i> Stock</label>
-                        <input type="number" class="form-control" placeholder="52">
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fa-solid fa-truck"></i> Supplier</label>
-                        <input type="text" class="form-control" placeholder="Acme Imports">
+                        <input type="number" class="form-control" placeholder="52" id="stock">
                     </div>
                     <div class="form-group">
                         <label><i class="fa-solid fa-image"></i> Image URL</label>
-                        <input type="url" class="form-control" placeholder="https://images.unsplash.com/...">
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fa-solid fa-note-sticky"></i> Notes</label>
-                        <textarea class="form-control" placeholder="Add shelf info, warranty, etc."></textarea>
+                        <input type="file" class="form-control" placeholder="https://images.unsplash.com/..." id="imageUrl">
                     </div>
                 </div>
                 <div class="form-actions">
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" onclick="addProduct();">
                         <i class="fa-solid fa-floppy-disk"></i>
                         Save Product
                     </button>
