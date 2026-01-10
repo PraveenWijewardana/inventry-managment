@@ -3,19 +3,21 @@ let productsCount = 0;
 let lowStockCount = 0;
 let outOfStockCount = 0;
 
-fetch("https://dummyjson.com/products")
-    .then(response => response.json())
-    .then(data => {
-        data.products.forEach(element => {
-            body+=` <article class="product-card">
+fetchProducts();
+
+
+async function fetchProducts() {
+    const response = await fetch("https://dummyjson.com/products");
+    const data = await response.json();
+    data.products.forEach(element => {
+        body+=` <article class="product-card">
                         <img src="${element.thumbnail}" alt="${element.title}" class="product-image">
                         <div class="product-body">
                             <div class="product-meta">
                                 <span class="category-badge">${element.category}</span>
-                                <span class="status-badge low-stock">Low Stock</span>
                             </div>
                             <h3>${element.title}</h3>
-                            <p class="muted">SKU: ${element.id}</p>
+                            <p class="muted">ID: ${element.id}</p>
                             <div class="product-footer">
                                 <div>
                                     <span class="price">$${element.price}</span>
@@ -40,5 +42,4 @@ fetch("https://dummyjson.com/products")
         document.getElementById("productsCount").textContent = productsCount;
         document.getElementById("lowStockCount").textContent = lowStockCount;
         document.getElementById("outOfStockCount").textContent = outOfStockCount;
-    })
-    .catch(error => console.error('Error fetching products:', error));
+}
