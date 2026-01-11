@@ -4,7 +4,7 @@ let productsCount = 0;
 let lowStockCount = 0;
 let outOfStockCount = 0;
 
-let array = JSON.parse(localStorage.getItem("products")) || [];
+var array = JSON.parse(localStorage.getItem("products")) || [];
 
 fetchProducts();
 
@@ -271,6 +271,80 @@ function updateProduct() {
         });
         location.reload();
     }
+}
+
+async function search() {
+    let category = document.getElementById("searchCategory").value;
+    body = "";
+
+    if (category == "All Categories") {
+        fetchProducts();
+        console.log("IF");
+        
+    } else {;
+        console.log(array);
+        
+        array.forEach(element => {
+            console.log(element.category.toLowerCase(), category.toLowerCase());
+            if (element.category.toLowerCase() == category.toLowerCase()) {
+                 body += `<div class="product-card">
+                        <img src="${product.url}" alt="${product.name}" class="product-image">
+                        <div class="product-body">
+                            <div class="product-meta">
+                                <span class="category-badge">${product.category}</span>
+                            </div>
+                            <h3>${product.name}</h3>
+                            <p class="muted">ID: ${product.id}</p>
+                            <div class="product-footer">
+                                <div>
+                                    <span class="price">$${product.price}</span>
+                                    <span class="stock">${product.stock} units</span>
+                                </div>
+                                <div class="action-chips">
+                                <button class="btn btn-sm btn-danger" onclick="removeProduct(${product.id});">Delete</button>
+                                <button class="btn btn-sm btn-primary" onclick="editProduct(${product.id});">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+        });
+
+
+
+    const response = await fetch("https://dummyjson.com/products");
+    const data = await response.json();
+    data.products.forEach(element => {
+
+        if (element.category.toLowerCase() == category.toLowerCase()) {
+        body += ` <div class="product-card">
+                        <img src="${element.thumbnail}" alt="${element.title}" class="product-image">
+                        <div class="product-body">
+                            <div class="product-meta">
+                                <span class="category-badge">${element.category}</span>
+                            </div>
+                            <h3>${element.title}</h3>
+                            <p class="muted">ID: ${element.id}</p>
+                            <div class="product-footer">
+                                <div>
+                                    <span class="price">$${element.price}</span>
+                                    <span class="stock">${element.stock} units</span>
+                                </div>
+                                <div class="action-chips">
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+        }
+    });
+        
+        loadBody();
+    }
+
+
+    productsCount = 0;
+    lowStockCount = 0;
+    outOfStockCount = 0;
 }
 
 loadDashboardStats();
