@@ -35,7 +35,7 @@ if (array.length > 0) {
         if (element.stock < 10) {
             lowStockCount++;
         }
-        if (element.stock === 0) {
+        if (element.stock == 0) {
             outOfStockCount++;
         }
         
@@ -127,7 +127,7 @@ function addProduct() {
     if (product.stock < 10) {
         lowStockCount++;
     }
-    if (product.stock === 0) {
+    if (product.stock == 0) {
         outOfStockCount++;
     }
     loadDashboardStats();
