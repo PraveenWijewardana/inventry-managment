@@ -1,7 +1,7 @@
 function btnLogin(){
 
     if(document.getElementById("email").value =="admin" && document.getElementById("password").value=="admin123"){
-        window.open("page.html");
+        window.open("dashboard.html","_self");
 
     }else{
          Swal.fire({

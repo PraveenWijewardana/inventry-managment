@@ -26,6 +26,7 @@ if (array.length > 0) {
                                 </div>
                                 <div class="action-chips">
                                 <button class="btn btn-sm btn-danger" onclick="removeProduct(${element.id});">Delete</button>
+                                <button class="btn btn-sm btn-primary" onclick="editProduct(${element.id});">Edit</button>
                                 </div>
                             </div>
                         </div>
@@ -117,6 +118,7 @@ function addProduct() {
                                 </div>
                                 <div class="action-chips">
                                 <button class="btn btn-sm btn-danger" onclick="removeProduct(${product.id});">Delete</button>
+                                <button class="btn btn-sm btn-primary" onclick="editProduct(${product.id});">Edit</button>
                                 </div>
                             </div>
                         </div>
@@ -226,5 +228,49 @@ function loadDashboardStats() {
     updateChart();
 }
 
+function editProduct(id) {
+
+    const product = array.find(prod => prod.id == id);
+
+
+    document.getElementById("formArea").scrollIntoView();
+
+    document.getElementById("id").value = product.id;
+    document.getElementById("price").value = product.price;
+    document.getElementById("stock").value = product.stock;
+    document.getElementById("imageUrl").url = product.url;
+    document.getElementById("name").value = product.name;
+    document.getElementById("category").value = product.category;
+}
+
+
+function updateProduct() {
+    const product = array.find(prod => prod.id == document.getElementById("id").value);
+
+    if (!product) {
+        Swal.fire({
+            title: "Product not found!",
+            icon: "error",
+            draggable: true
+        });
+    }else{
+
+        product.id = document.getElementById("id").value;
+        product.price = document.getElementById("price").value;
+        product.stock = document.getElementById("stock").value;
+        product.name = document.getElementById("name").value;
+        product.category = document.getElementById("category").value;
+        product.url = document.getElementById("imageUrl").value;
+
+        localStorage.setItem("products", JSON.stringify(array));
+
+        Swal.fire({
+            title: "Updated successfully!",
+            icon: "success",
+            draggable: true
+        });
+        location.reload();
+    }
+}
 
 loadDashboardStats();
